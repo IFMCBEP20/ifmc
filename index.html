@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>IFMC — Ireland First Meme Centre</title>
+  <meta name="description" content="Ireland's premier memecoin launchpad on BSC — fair, fast, transparent." />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <div class="top-nav">
+      <div class="brand">
+        <img src="logo.png" alt="IFMC Logo" class="logo">
+        <div>
+          <h1>IFMC</h1>
+          <div class="muted">Ireland First Meme Centre</div>
+        </div>
+      </div>
+      <div class="wallet-row">
+        <span id="networkTag" class="tag">Not connected</span>
+        <button id="connectBtn" class="btn primary">Connect Wallet</button>
+        <button id="disconnectBtn" class="btn" style="display:none;">Disconnect</button>
+      </div>
+    </div>
+    <nav>
+      <ul>
+        <li><a href="#" class="active" onclick="switchTab('home')">Home</a></li>
+        <li><a href="#" onclick="switchTab('about')">About</a></li>
+        <li><a href="#" onclick="switchTab('how')">How It Works</a></li>
+        <li><a href="#" onclick="switchTab('launched')">Launched Tokens</a></li>
+        <li><a href="#" onclick="switchTab('factory')">Factory Contract</a></li>
+        <li><a href="#" onclick="switchTab('whitepaper')">White Paper</a></li>
+        <li><a href="#" onclick="switchTab('contracts')">Contracts</a></li>
+        <li><a href="#" onclick="switchTab('create')">Create Token</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main class="container">
+
+    <!-- HOME -->
+    <div id="home" class="tab-content active">
+      <div class="hero">
+        <h1>Launch Your Meme Empire</h1>
+        <p>Fair, transparent memecoin launches on Binance Smart Chain.</p>
+      </div>
+      <p class="muted">Connect wallet to get started. Launch for 0.0055 BNB.</p>
+    </div>
+
+    <!-- ABOUT -->
+    <div id="about" class="tab-content">
+      <div class="card">
+        <h2>About IFMC</h2>
+        <p>IFMC is Ireland's first memecoin launchpad on BSC. Fair launches with bonding curves, auto-migration to PancakeSwap, and burned LP.</p>
+      </div>
+    </div>
+
+    <!-- HOW IT WORKS -->
+    <div id="how" class="tab-content">
+      <div class="card">
+        <h2>How It Works</h2>
+        <p>1. Connect wallet.<br>2. Create token (name, symbol, logo).<br>3. Trade on curve.<br>4. At 6 BNB: Auto-list on PancakeSwap (LP burned).</p>
+      </div>
+    </div>
+
+    <!-- LAUNCHED TOKENS -->
+    <div id="launched" class="tab-content">
+      <div class="card">
+        <h2>Launched Tokens</h2>
+        <div id="tokensList"></div>
+      </div>
+    </div>
+
+    <!-- FACTORY CONTRACT -->
+    <div id="factory" class="tab-content">
+      <div class="card">
+        <h2>Factory Contract</h2>
+        <p>Address: <span id="factoryAddr"></span></p>
+        <p>Launch Fee: 0.0055 BNB</p>
+      </div>
+    </div>
+
+    <!-- WHITE PAPER -->
+    <div id="whitepaper" class="tab-content">
+      <div class="card">
+        <h2>IFMC White Paper</h2>
+        <p>IFMC is a fair memecoin launchpad on BSC. 1B tokens per meme, 2 decimals, 30 BNB virtual liq, 6 BNB migration, 20% LP burned. Fees: 0.0055 BNB launch, 1% trading.</p>
+        <p>Goal: Empower Irish creators with rug-proof launches.</p>
+      </div>
+    </div>
+
+    <!-- CONTRACTS -->
+    <div id="contracts" class="tab-content">
+      <div class="card">
+        <h2>Contract Details</h2>
+        <input id="contractInput" class="input" placeholder="Enter token address">
+        <button onclick="fetchContractDetails()" class="btn primary">Fetch</button>
+        <div id="contractDetails"></div>
+      </div>
+    </div>
+
+    <!-- CREATE TOKEN -->
+    <div id="create" class="tab-content">
+      <div class="card">
+        <h2>Create Token</h2>
+        <div class="field"><label>Name *</label><input id="tokenName" class="input"></div>
+        <div class="field"><label>Symbol *</label><input id="tokenSymbol" class="input"></div>
+        <div class="field"><label>Logo (PNG)</label><input type="file" id="tokenFile" accept="image/png"></div>
+        <button onclick="createToken()" class="btn primary">Launch (0.0055 BNB)</button>
+        <div id="createStatus" class="status"></div>
+      </div>
+    </div>
+
+  </main>
+
+  <footer class="footer">
+    © 2025 IFMC — Ireland's Meme Launchpad on BSC. DYOR.
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/ethers@5.7.2/dist/ethers.umd.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/web3modal@1.9.12/dist/index.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
