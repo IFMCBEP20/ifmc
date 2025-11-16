@@ -235,67 +235,70 @@
   <script>
     // ==== CONFIG ====
     const PINATA_JWT = "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySW5mb3JtYXRpb24iOnsiaWQiOiIwMWE2OGMwMy04OTVlLTQxNjktOThmOS05NmI5NDc1MTAxZTAiLCJlbWFpbCI6Im1vbG1jZDE1QGdtYWlsLmNvbSIsImVtYWlsX3ZlcmlmaWVkIjp0cnVlLCJwaW5fcG9saWN5Ijp7InJlZ2lvbnMiOlt7ImRlc2lyZWRSZXBsaWNhdGlvbkNvdW50IjoxLCJpZCI6IkZSQTEifSx7ImRlc2lyZWRSZXBsaWNhdGlvbkNvdW50IjoxLCJpZCI6Ik5ZQzEifV0sInZlcnNpb24iOjF9LCJtZmFfZW5hYmxlZCI6ZmFsc2UsInN0YXR1cyI6IkFDVElWRSJ9LCJhdXRoZW50aWNhdGlvblR5cGUiOiJzY29wZWRLZXkiLCJzY29wZWRLZXlLZXkiOiJjM2YwNDJhODM5ZDc2ZWJhNGI2ZiIsInNjb3BlZEtleVNlY3JldCI6ImU2ZDExZTNmMzMzYTAyMjE5YzhiMGRmNGQwYTFlOWE5ZmY5ODk1ODU5NmIwMTg5NjRmZDEwNDUxZmEwZWUwZWQiLCJleHAiOjE3OTQ3NzEwNTB9.uYLCz6zngmd4kLeKolvJYwCr3XcV-296eP-jLpBJRYY";
-    const FACTORY_ADDRESS = "0xDa6615eC2b3cC2C27260DEE31828A8945D761318";
+    const FACTORY_ADDRESS = "0xc674A69Fc9D18ca221469f3DE5F482b20Da506d7";
 
-  const FACTORY_ABI = [
+  const FACTORY_ADDRESS = "0xc674A69Fc9D18ca221469f3DE5F482b20Da506d7";
+
+const FACTORY_ABI = [
   {
-    "inputs": [],
-    "stateMutability": "nonpayable",
-    "type": "constructor"
-  },
-  {
-    "anonymous": false,
-    "inputs": [
-      { "indexed": false, "internalType": "uint256", "name": "id", "type": "uint256" },
-      { "indexed": false, "internalType": "address", "name": "token", "type": "address" },
-      { "indexed": false, "internalType": "address", "name": "curve", "type": "address" },
-      { "indexed": false, "internalType": "string", "name": "name", "type": "string" },
-      { "indexed": false, "internalType": "string", "name": "symbol", "type": "string" }
-    ],
     "name": "MemeLaunched",
-    "type": "event"
-  },
-  {
-    "inputs": [],
-    "name": "LAUNCH_FEE",
-    "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }],
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "inputs": [],
-    "name": "LAUNCH_FEE_RECIPIENT",
-    "outputs": [{ "internalType": "address", "name": "", "type": "address" }],
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
+    "type": "event",
     "inputs": [
-      { "internalType": "string", "name": "name", "type": "string" },
-      { "internalType": "string", "name": "symbol", "type": "string" },
-      { "internalType": "string", "name": "ipfsHash", "type": "string" }
+      { "name": "token", "type": "address", "indexed": true, "internalType": "address" },
+      { "name": "curve", "type": "address", "indexed": true, "internalType": "address" },
+      { "name": "name", "type": "string", "indexed": false, "internalType": "string" },
+      { "name": "symbol", "type": "string", "indexed": false, "internalType": "string" },
+      { "name": "description", "type": "string", "indexed": false, "internalType": "string" },
+      { "name": "ipfsHash", "type": "string", "indexed": false, "internalType": "string" },
+      { "name": "twitter", "type": "string", "indexed": false, "internalType": "string" },
+      { "name": "telegram", "type": "string", "indexed": false, "internalType": "string" }
     ],
+    "anonymous": false
+  },
+  {
+    "name": "LAUNCH_FEE",
+    "type": "function",
+    "inputs": [],
+    "outputs": [{ "name": "", "type": "uint256", "internalType": "uint256" }],
+    "stateMutability": "view"
+  },
+  {
+    "name": "LAUNCH_FEE_RECIPIENT",
+    "type": "function",
+    "inputs": [],
+    "outputs": [{ "name": "", "type": "address", "internalType": "address" }],
+    "stateMutability": "view"
+  },
+  {
     "name": "createTokenAndBuy",
-    "outputs": [
-      { "internalType": "address", "name": "", "type": "address" },
-      { "internalType": "address", "name": "", "type": "address" }
+    "type": "function",
+    "inputs": [
+      { "name": "name", "type": "string", "internalType": "string" },
+      { "name": "symbol", "type": "string", "internalType": "string" },
+      { "name": "description", "type": "string", "internalType": "string" },
+      { "name": "ipfsHash", "type": "string", "internalType": "string" },
+      { "name": "twitter", "type": "string", "internalType": "string" },
+      { "name": "telegram", "type": "string", "internalType": "string" }
     ],
-    "stateMutability": "payable",
-    "type": "function"
+    "outputs": [
+      { "name": "tokenAddr", "type": "address", "internalType": "address" },
+      { "name": "curveAddr", "type": "address", "internalType": "address" }
+    ],
+    "stateMutability": "payable"
   },
   {
-    "inputs": [],
     "name": "pancakeRouter",
-    "outputs": [{ "internalType": "address", "name": "", "type": "address" }],
-    "stateMutability": "view",
-    "type": "function"
+    "type": "function",
+    "inputs": [],
+    "outputs": [{ "name": "", "type": "address", "internalType": "address" }],
+    "stateMutability": "view"
   },
   {
-    "inputs": [],
     "name": "platformFeeAddress",
-    "outputs": [{ "internalType": "address", "name": "", "type": "address" }],
-    "stateMutability": "view",
-    "type": "function"
+    "type": "function",
+    "inputs": [],
+    "outputs": [{ "name": "", "type": "address", "internalType": "address" }],
+    "stateMutability": "view"
   }
 ];
     const BSC_MAINNET = {chainId:"0x38",chainName:"BNB Smart Chain",nativeCurrency:{name:"BNB",symbol:"BNB",decimals:18},rpcUrls:["https://bsc-dataseed.binance.org/"],blockExplorerUrls:["https://bscscan.com"]};
