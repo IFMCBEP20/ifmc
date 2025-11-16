@@ -353,25 +353,75 @@
     }
 
     // ==== LAUNCH LOGIC ====
-    createBtn.onclick = async () => {
-      if(!signer) return showStatus("Connect wallet first.",true);
-      const name=$("tokenName").value.trim(), symbol=$("tokenSymbol").value.trim(),
-            desc=$("tokenDesc").value.trim(), twitter=$("tokenTwitter").value.trim(),
-            telegram=$("tokenTelegram").value.trim(), buyInput=$("buyAmount").value.trim(),
-            file=$("tokenFile").files[0];
-      if(!name||!symbol) return showStatus("Name and symbol required.",true);
-      const buyAmt = buyInput?parseFloat(buyInput):0;
-      if(buyAmt<0) return showStatus("Buy amount cannot be negative.",true);
-      const buyWei = buyAmt?ethers.utils.parseEther(buyAmt.toFixed(18)):ethers.BigNumber.from(0);
-      const total = launchFeeWei.add(buyWei);
-      createBtn.disabled=true; btnText.innerHTML=`<span class="spinner"></span> Confirm in wallet…`;
+createBtn.onclick = async () => {
+  if (!signer) return showStatus("Connect wallet first.", true);
+  const name = $("tokenName").value.trim(),
+        symbol = $("tokenSymbol").value.trim(),
+        desc = $("tokenDesc").value.trim(),
+        twitter = $("tokenTwitter").value.trim(),
+        telegram = $("tokenTelegram").value.trim(),
+        buyInput = $("buyAmount").value.trim(),
+        file = $("tokenFile").files[0];
+  if (!name || !symbol) return showStatus("Name and symbol required.", true);
+  const buyAmt = buyInput ? parseFloat(buyInput) : 0;
+  if (buyAmt < 0) return showStatus("Buy amount cannot be negative.", true);
+  const buyWei = buyAmt ? ethers.utils.parseEther(buyAmt.toFixed(18)) : ethers.BigNumber.from(0);
+  const total = launchFeeWei.add(buyWei);
+  createBtn.disabled = true; 
+  btnText.innerHTML = `<span class="spinner"></span> Confirm in wallet…`;
 
-      let ipfs="";
-      if(file){
-        try{ btnText.innerHTML=`<span class="spinner"></span> Uploading image…`; ipfs=await uploadToPinata(file);
-          showStatus(`Image uploaded! <a href="https://gateway.pinata.cloud/ipfs/${ipfs}" target="_blank">View on IPFS</a>`);
-        }catch(e){ createBtn.disabled=false; btnText.textContent="Create & Buy"; return showStatus("Image upload failed.",true); }
-      }
+  let ipfs = "";
+  if (file) {
+    try { 
+      btnText.innerHTML = `<span class="spinner"></span> Uploading image…`; 
+      ipfs = await uploadToPinata(file);
+      showStatus(`Image uploaded! <a href="https://gateway.pinata.cloud/ipfs/${ipfs}" target="_blank">View on IPFS</a>`);
+    } catch (e) { 
+      createBtn.disabled = false; 
+      btnText.textContent = "Create & Buy"; 
+      return showStatus("Image upload failed.", true); 
+    }
+  }
+
+  btnText.innerHTML = `<span class="spinner"></span> Sending transaction…`;
+  try {
+    const tx = await factoryContract.createTokenAndBuy(
+      name,       // name
+      symbol,     // symbol
+      desc,       // description (TEXT)
+      ipfs,       // ipfsHash (CID) ← FIXED
+      twitter,    // twitter
+      telegram,   // telegram
+      { value: total, gasLimit: 5_000_000 }
+    );
+    showStatus(`Tx sent! <a href="https://bscscan.com/tx/${tx.hash}" target="_blank">BscScan</a>`);
+    btnText.innerHTML = `<span class="spinner"></span> Confirming…`;
+    const receipt = await tx.wait();
+    const ev = receipt.events?.find(e => e.event === "MemeLaunched");
+    if (!ev) throw new Error("Event not found");
+    const { token, curve } = ev.args;
+    resultLinks.innerHTML = `
+      <a href="https://bscscan.com/address/${token}" target="_blank">Token: ${name} (${symbol})</a>
+      <a href="https://bscscan.com/address/${curve}" target="_blank">Bonding Curve</a>
+      <a href="https://bscscan.com/tx/${tx.hash}" target="_blank">Launch Tx</a>
+    `;
+    resultLinks.style.display = "block";
+    showStatus("Launched successfully!", false);
+    btnText.textContent = "Launched!";
+  } catch (e) {
+    console.error(e);
+    let msg = "Transaction failed.";
+    if (e.reason) msg = `Revert: ${e.reason}`;
+    else if (e.message.includes("user rejected")) msg = "You rejected the tx.";
+    else if (e.message.includes("insufficient")) msg = "Not enough BNB.";
+    showStatus(msg, true);
+  } finally {
+    if (!resultLinks.style.display.includes("block")) { 
+      createBtn.disabled = false; 
+      btnText.textContent = "Create & Buy"; 
+    }
+  }
+};
 
       btnText.innerHTML=`<span class="spinner"></span> Sending transaction…`;
       try{
