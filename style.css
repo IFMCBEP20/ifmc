@@ -1,0 +1,41 @@
+:root {
+  --bg: #F0F8FF;    /* Light blue-white */
+  --accent: #00BFFF;  /* Bright blue */
+  --text: #001F3F;  /* Dark navy */
+  --muted: #6C757D;
+  --success: #28A745;
+  --danger: #DC3545;
+  --radius: 12px;
+  --shadow: 0 4px 12px rgba(0, 191, 255, 0.2);
+}
+
+* { box-sizing:border-box; margin:0; padding:0; }
+body { background: var(--bg); color: var(--text); font-family: 'Inter', sans-serif; line-height:1.6; min-height:100vh; }
+a { color: var(--accent); text-decoration:none; }
+header { background: linear-gradient(135deg, #00BFFF, #1E90FF); padding:1rem; position:sticky; top:0; z-index:100; box-shadow: var(--shadow); }
+.top-nav { display:flex; justify-content:space-between; align-items:center; }
+.brand { display:flex; align-items:center; gap:1rem; }
+.logo { width:50px; height:50px; border-radius:50%; }
+.brand h1 { font-size:1.8rem; color:white; }
+.wallet-row { display:flex; gap:1rem; }
+.tag { padding:0.5rem 1rem; background:white; border-radius:999px; color:var(--text); }
+.btn { padding:0.75rem 1.5rem; border-radius:var(--radius); cursor:pointer; background:var(--accent); color:white; border:none; transition:0.2s; }
+.btn:hover { box-shadow:var(--shadow); transform:scale(1.05); }
+nav ul { display:flex; list-style:none; gap:0.5rem; flex-wrap:wrap; justify-content:center; margin-top:1rem; }
+nav a { padding:0.75rem 1.5rem; color:white; background:transparent; border-radius:var(--radius); transition:0.2s; }
+nav a:hover, nav a.active { background:white; color:var(--accent); }
+.container { max-width:1200px; margin:2rem auto; padding:1rem; }
+.hero { text-align:center; padding:3rem; background:linear-gradient(135deg, white, #E0F7FA); border-radius:var(--radius); margin-bottom:2rem; }
+.hero h1 { font-size:2.8rem; color:var(--accent); }
+.card { background:white; border-radius:var(--radius); padding:2rem; box-shadow:var(--shadow); }
+.field { margin:1rem 0; }
+.label { display:block; margin-bottom:0.5rem; font-weight:500; }
+.input { width:100%; padding:0.75rem; border:1px solid var(--muted); border-radius:var(--radius); color:var(--text); }
+.status { padding:1rem; border-radius:var(--radius); display:none; }
+.status.success { background:#D4EDDA; color:var(--success); }
+.status.error { background:#F8D7DA; color:var(--danger); }
+.status.show { display:block; }
+.footer { text-align:center; padding:2rem; color:var(--muted); border-top:1px solid var(--muted); }
+.tab-content { display:none; }
+.tab-content.active { display:block; }
+@media (max-width:768px) { nav ul { flex-direction:column; } }
