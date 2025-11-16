@@ -4,15 +4,88 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>IFMC — Ireland First Meme Centre</title>
-  <meta name="description" content="Ireland's premier memecoin launchpad on BSC — fair, fast, transparent." />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css">
+  <meta name="description" content="Professional memecoin launchpad on BSC — fair, fast, transparent." />
+  
+  
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Avenir:wght@400;500;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #001F3F;               /* deep navy */
+      --bg-gradient: linear-gradient(135deg, #001F3F 0%, #003366 100%);
+      --card: #002855;
+      --text: #F8F9FA;
+      --muted: #ADB5BD;
+      --accent: #007BFF;            /* primary blue */
+      --accent-2: #00BFFF;
+      --success: #28A745;
+      --danger: #DC3545;
+      --border: #004085;
+      --radius: 8px;
+      --shadow: 0 4px 12px rgba(0,123,255,.15);
+    }
+    * { box-sizing:border-box; margin:0; padding:0; }
+    html,body{background:var(--bg-gradient);color:var(--text);font-family:'Inter','Avenir',sans-serif;line-height:1.6;min-height:100vh;}
+    a{color:var(--accent);text-decoration:none;}
+    header{padding:1rem 1.5rem;border-bottom:1px solid var(--border);background:rgba(0,31,63,.95);backdrop-filter:blur(12px);position:sticky;top:0;z-index:100;}
+    .top-nav{display:flex;justify-content:space-between;align-items:center;margin-bottom:1rem;}
+    .brand{display:flex;align-items:center;gap:14px;font-family:'Avenir',sans-serif;}
+    .logo{width:40px;height:40px;border-radius:50%;transition:transform .2s;}
+    .logo:hover{transform:scale(1.05);}
+    .brand h1{font-size:1.5rem;font-weight:700;color:var(--accent);}
+    .wallet-row{display:flex;gap:1rem;align-items:center;}
+    .tag{font-size:.75rem;padding:.25rem .5rem;border-radius:999px;font-weight:500;border:1px solid var(--border);color:var(--muted);}
+    .btn{padding:.65rem 1.1rem;border-radius:var(--radius);font-weight:600;cursor:pointer;border:1px solid var(--border);background:var(--card);color:var(--text);transition:all .2s;min-height:44px;font-family:'Avenir',sans-serif;}
+    .btn:hover{background:#003366;box-shadow:var(--shadow);}
+    .btn.primary{background:linear-gradient(135deg,var(--accent),var(--accent-2));color:#fff;border:none;}
+    .btn.primary:hover{transform:translateY(-1px);box-shadow:0 6px 20px rgba(0,123,255,.4);}
+    nav ul{display:flex;list-style:none;gap:0;background:var(--card);border-radius:var(--radius);overflow:hidden;box-shadow:var(--shadow);}
+    nav li{flex:1;}
+    nav a{display:block;padding:.75rem 1rem;text-align:center;color:var(--text);transition:background .2s;}
+    nav a:hover,nav a.active{background:var(--accent);color:#fff;}
+    @media(max-width:768px){nav ul{flex-direction:column;}}
+    .container{max-width:1200px;margin:0 auto;padding:2rem 1.5rem;}
+    .hero{text-align:center;padding:3rem 0;background:rgba(0,123,255,.05);border-radius:var(--radius);margin-bottom:2rem;}
+    .hero h1{font-size:2.8rem;font-weight:700;background:linear-gradient(135deg,var(--accent),var(--accent-2));-webkit-background-clip:text;-webkit-text-fill-color:transparent;margin-bottom:1rem;font-family:'Avenir',sans-serif;}
+    .hero p{font-size:1.2rem;color:var(--muted);max-width:800px;margin:0 auto;}
+    .tab-content{display:none;}
+    .tab-content.active{display:block;}
+    .grid{display:grid;grid-template-columns:1fr;gap:1.5rem;}
+    @media(min-width:960px){.grid{grid-template-columns:1.4fr 1fr;}}
+    @media(max-width:480px){.container{padding:1rem;}}
+    .card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:1.5rem;box-shadow:var(--shadow);}
+    .card h2{font-size:1.4rem;font-weight:700;margin-bottom:1rem;color:var(--accent);font-family:'Avenir',sans-serif;}
+    .muted{color:var(--muted);font-size:.875rem;}
+    .field{margin:1rem 0;position:relative;}
+    .label{display:block;margin-bottom:.5rem;font-weight:500;}
+    .input,.textarea{width:100%;padding:.75rem;background:#001F3F;border:1px solid var(--border);color:var(--text);border-radius:var(--radius);min-height:44px;}
+    .input:focus,.textarea:focus{border-color:var(--accent);outline:none;}
+    .textarea{min-height:100px;resize:vertical;}
+    .status{margin-top:1rem;padding:.75rem;border-radius:var(--radius);font-weight:500;display:none;animation:fadeIn .3s;}
+    .status.success{background:rgba(40,167,69,.1);color:var(--success);}
+    .status.error{background:rgba(220,53,69,.1);color:var(--danger);}
+    .status.show{display:block;}
+    @keyframes fadeIn{from{opacity:0;}to{opacity:1;}}
+    .links{display:flex;flex-direction:column;gap:.5rem;margin-top:.75rem;}
+    .links a{font-size:.875rem;}
+    table{width:100%;border-collapse:collapse;margin-top:1rem;}
+    th,td{padding:.75rem;text-align:left;border-bottom:1px solid var(--border);}
+    th{background:var(--bg);font-weight:600;}
+    .spinner{width:16px;height:16px;border:2px solid transparent;border-top:2px solid var(--accent);border-radius:50%;animation:spin .8s linear infinite;display:inline-block;margin-right:8px;}
+    @keyframes spin{to{transform:rotate(360deg);}}
+    .steps,.faq{display:flex;flex-direction:column;gap:1rem;}
+    .step,.faq-item{padding:1rem;background:rgba(0,123,255,.05);border-left:3px solid var(--accent);}
+    .table-comparison{width:100%;border-collapse:collapse;}
+    .table-comparison th,.table-comparison td{padding:.75rem;text-align:left;border:1px solid var(--border);}
+    .footer{margin-top:3rem;padding:2rem;text-align:center;color:var(--muted);font-size:.875rem;border-top:1px solid var(--border);}
+    .loading{text-align:center;padding:2rem;color:var(--muted);}
+  </style>
 </head>
 <body>
   <header>
     <div class="top-nav">
       <div class="brand">
-        <img src="logo.png" alt="IFMC Logo" class="logo">
+        <img src="./logo.png" alt="IFMC Logo" class="logo" onerror="this.style.display='none';document.getElementById('fallbackLogo').style.display='block';">
+        <div id="fallbackLogo" class="logo" style="display:none;background:linear-gradient(135deg,var(--accent),var(--accent-2));"></div>
         <div>
           <h1>IFMC</h1>
           <div class="muted">Ireland First Meme Centre</div>
@@ -26,101 +99,369 @@
     </div>
     <nav>
       <ul>
-        <li><a href="#" class="active" onclick="switchTab('home')">Home</a></li>
+        <li><a href="#" onclick="switchTab('home')" class="active">Home</a></li>
         <li><a href="#" onclick="switchTab('about')">About</a></li>
         <li><a href="#" onclick="switchTab('how')">How It Works</a></li>
-        <li><a href="#" onclick="switchTab('launched')">Launched Tokens</a></li>
+        <li><a href="#" onclick="switchTab('tokens')">Launched Tokens</a></li>
         <li><a href="#" onclick="switchTab('factory')">Factory Contract</a></li>
-        <li><a href="#" onclick="switchTab('whitepaper')">White Paper</a></li>
-        <li><a href="#" onclick="switchTab('contracts')">Contracts</a></li>
-        <li><a href="#" onclick="switchTab('create')">Create Token</a></li>
       </ul>
     </nav>
   </header>
 
   <main class="container">
 
-    <!-- HOME -->
+    <!-- ==== HOME ==== -->
     <div id="home" class="tab-content active">
       <div class="hero">
         <h1>Launch Your Meme Empire</h1>
-        <p>Fair, transparent memecoin launches on Binance Smart Chain.</p>
+        <p>Fair, transparent, and fully on-chain memecoin launches on Binance Smart Chain.</p>
       </div>
-      <p class="muted">Connect wallet to get started. Launch for 0.0055 BNB.</p>
+
+      <div class="grid">
+        <section class="card">
+          <h2>Launch Your Meme Token</h2>
+          <p class="muted">Deploy via verified factory. Fee: 0.0011 BNB (covers gas + curve setup). Optional buy for instant liquidity.</p>
+
+          <div class="field"><label class="label">Token Name <span style="color:var(--danger)">*</span></label><input class="input" id="tokenName" placeholder="DogeKing"/></div>
+          <div class="field"><label class="label">Token Symbol <span style="color:var(--danger)">*</span></label><input class="input" id="tokenSymbol" placeholder="DOGEK"/></div>
+          <div class="field"><label class="label">Image / GIF (optional)</label><input type="file" id="tokenFile" accept="image/*,.gif"/></div>
+          <div class="field"><label class="label">Description</label><textarea class="textarea" id="tokenDesc" placeholder="The king of all doges..."></textarea></div>
+          <div class="field"><label class="label">Twitter URL</label><input class="input" id="tokenTwitter" placeholder="https://x.com/dogeking"/></div>
+          <div class="field"><label class="label">Telegram URL</label><input class="input" id="tokenTelegram" placeholder="https://t.me/dogeking"/></div>
+          <div class="field">
+            <label class="label">Buy at Launch (BNB) – Optional</label>
+            <input class="input" id="buyAmount" placeholder="0" type="number" step="0.0001"/>
+            <div id="feeDisplay" class="muted" style="display:none;">Launch Fee: <span id="launchFee">0.0011</span> BNB + your buy amount.</div>
+          </div>
+
+          <button id="createAndBuyBtn" class="btn primary" style="width:100%;margin-top:1rem;">
+            <span id="btnText">Create &amp; Buy</span>
+          </button>
+
+          <div id="launchStatus" class="status"></div>
+          <div id="resultLinks" class="links" style="display:none;"></div>
+        </section>
+
+        <aside class="card">
+          <h2>Wallet</h2>
+          <div class="muted">Account: <span id="accountAddr">—</span></div>
+          <div class="muted">Network: <span id="networkName">—</span></div>
+          <div class="muted">Chain ID: <span id="chainId">—</span></div>
+          <div class="muted">Balance: <span id="balance">—</span> BNB</div>
+          <p class="muted" style="margin-top:1rem;">Need BNB? <a href="https://pancakeswap.finance/swap" target="_blank">Buy on PancakeSwap</a></p>
+        </aside>
+      </div>
     </div>
 
-    <!-- ABOUT -->
+    <!-- ==== ABOUT ==== -->
     <div id="about" class="tab-content">
       <div class="card">
         <h2>About IFMC</h2>
-        <p>IFMC is Ireland's first memecoin launchpad on BSC. Fair launches with bonding curves, auto-migration to PancakeSwap, and burned LP.</p>
+        <p class="muted">Ireland First Meme Centre is a professional, fully on-chain launchpad for memecoins on Binance Smart Chain.</p>
+        <div class="steps">
+          <div class="step"><strong>Mission</strong> – Empower creators with fair, transparent launches.</div>
+          <div class="step"><strong>Key Features</strong> – Bonding-curve liquidity, auto-migration to PancakeSwap, no pre-mint, verified contracts.</div>
+          <div class="step"><strong>Risks</strong> – Crypto is volatile. Always do your own research (DYOR).</div>
+        </div>
+
+        <h3 style="margin-top:2rem;">Why Choose IFMC?</h3>
+        <table class="table-comparison">
+          <thead><tr><th>Feature</th><th>IFMC</th><th>Typical Launchpads</th></tr></thead>
+          <tbody>
+            <tr><td>Fair Launch</td><td>Yes (Bonding Curve)</td><td>Often No</td></tr>
+            <tr><td>Launch Fee</td><td>0.0011 BNB</td><td>Variable / High</td></tr>
+            <tr><td>Mobile Support</td><td>Full (WalletConnect)</td><td>Limited</td></tr>
+            <tr><td>Verified Contract</td><td>Yes</td><td>Not always</td></tr>
+          </tbody>
+        </table>
+
+        <div class="faq" style="margin-top:2rem;">
+          <div class="faq-item"><strong>Is it safe?</strong> All logic lives on-chain; the factory is verified on BscScan.</div>
+          <div class="faq-item"><strong>Can I launch on testnet first?</strong> Yes – switch to BSC Testnet in your wallet and use the same UI.</div>
+        </div>
       </div>
     </div>
 
-    <!-- HOW IT WORKS -->
+    <!-- ==== HOW IT WORKS ==== -->
     <div id="how" class="tab-content">
       <div class="card">
         <h2>How It Works</h2>
-        <p>1. Connect wallet.<br>2. Create token (name, symbol, logo).<br>3. Trade on curve.<br>4. At 6 BNB: Auto-list on PancakeSwap (LP burned).</p>
+        <div class="steps">
+          <div class="step"><strong>1.</strong> Connect a wallet (MetaMask, Trust, etc.) and ensure you have ≥ 0.002 BNB.</div>
+          <div class="step"><strong>2.</strong> Fill the form – name, symbol, optional image (uploaded to IPFS), social links.</div>
+          <div class="step"><strong>3.</strong> Click **Create &amp; Buy** – pays 0.0011 BNB fee + optional buy amount.</div>
+          <div class="step"><strong>4.</strong> Factory deploys an ERC-20 token **and** a bonding-curve contract. Full supply goes to the curve.</div>
+          <div class="step"><strong>5.</strong> Price starts low; buying pushes it up. When thresholds are hit (≈20 % sold or $10 k value) liquidity auto-migrates to PancakeSwap.</div>
+          <div class="step"><strong>6.</strong> Track everything on BscScan – token, curve, transaction.</div>
+        </div>
       </div>
     </div>
 
-    <!-- LAUNCHED TOKENS -->
-    <div id="launched" class="tab-content">
+    <!-- ==== LAUNCHED TOKENS ==== -->
+    <div id="tokens" class="tab-content">
       <div class="card">
-        <h2>Launched Tokens</h2>
+        <h2>Recently Launched Tokens</h2>
+        <div id="tokensLoading" class="loading" style="display:none;"><span class="spinner"></span>Fetching launches…</div>
         <div id="tokensList"></div>
+        <p class="muted" style="text-align:center;margin-top:1rem;">
+          Powered by <code>MemeLaunched</code> events. 
+          <a href="https://bscscan.com/address/0x10f6dcD13531437B1C6E3FC85Bfc48Ff643234A0#events" target="_blank">View All on BscScan</a>
+        </p>
       </div>
     </div>
 
-    <!-- FACTORY CONTRACT -->
+    <!-- ==== FACTORY CONTRACT ==== -->
     <div id="factory" class="tab-content">
       <div class="card">
-        <h2>Factory Contract</h2>
-        <p>Address: <span id="factoryAddr"></span></p>
-        <p>Launch Fee: 0.0055 BNB</p>
-      </div>
-    </div>
-
-    <!-- WHITE PAPER -->
-    <div id="whitepaper" class="tab-content">
-      <div class="card">
-        <h2>IFMC White Paper</h2>
-        <p>IFMC is a fair memecoin launchpad on BSC. 1B tokens per meme, 2 decimals, 30 BNB virtual liq, 6 BNB migration, 20% LP burned. Fees: 0.0055 BNB launch, 1% trading.</p>
-        <p>Goal: Empower Irish creators with rug-proof launches.</p>
-      </div>
-    </div>
-
-    <!-- CONTRACTS -->
-    <div id="contracts" class="tab-content">
-      <div class="card">
-        <h2>Contract Details</h2>
-        <input id="contractInput" class="input" placeholder="Enter token address">
-        <button onclick="fetchContractDetails()" class="btn primary">Fetch</button>
-        <div id="contractDetails"></div>
-      </div>
-    </div>
-
-    <!-- CREATE TOKEN -->
-    <div id="create" class="tab-content">
-      <div class="card">
-        <h2>Create Token</h2>
-        <div class="field"><label>Name *</label><input id="tokenName" class="input"></div>
-        <div class="field"><label>Symbol *</label><input id="tokenSymbol" class="input"></div>
-        <div class="field"><label>Logo (PNG)</label><input type="file" id="tokenFile" accept="image/png"></div>
-        <button onclick="createToken()" class="btn primary">Launch (0.0055 BNB)</button>
-        <div id="createStatus" class="status"></div>
+        <h2>IFMC Factory Contract</h2>
+        <p class="muted">Verified on BSC Mainnet – deploys tokens & bonding curves securely.</p>
+        <a href="https://bscscan.com/address/0x10f6dcD13531437B1C6E3FC85Bfc48Ff643234A0#code" target="_blank" class="btn primary">Open on BscScan</a>
+        <div id="feeInfo" class="muted" style="margin-top:1rem;">Launch Fee: <span id="contractFee">Loading…</span> BNB</div>
+        <p class="muted">Recent transactions: <a href="https://bscscan.com/address/0x10f6dcD13531437B1C6E3FC85Bfc48Ff643234A0#tokentxns" target="_blank">View on BscScan</a></p>
       </div>
     </div>
 
   </main>
 
   <footer class="footer">
-    © 2025 IFMC — Ireland's Meme Launchpad on BSC. DYOR.
+    © 2025 IFMC — Professional memecoin launchpad on <strong>BSC Mainnet</strong>. Not financial advice. DYOR.
   </footer>
 
+  <!-- ==== SCRIPTS ==== -->
   <script src="https://cdn.jsdelivr.net/npm/ethers@5.7.2/dist/ethers.umd.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/web3modal@1.9.12/dist/index.js"></script>
-  <script src="script.js"></script>
-</body>
+  <script src="https://cdn.jsdelivr.net/npm/@walletconnect/web3-provider@1.8.0/dist/umd/index.min.js"></script>
+
+  <script>
+    // ==== CONFIG ====
+    const PINATA_JWT = "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySW5mb3JtYXRpb24iOnsiaWQiOiIwMWE2OGMwMy04OTVlLTQxNjktOThmOS05NmI5NDc1MTAxZTAiLCJlbWFpbCI6Im1vbG1jZDE1QGdtYWlsLmNvbSIsImVtYWlsX3ZlcmlmaWVkIjp0cnVlLCJwaW5fcG9saWN5Ijp7InJlZ2lvbnMiOlt7ImRlc2lyZWRSZXBsaWNhdGlvbkNvdW50IjoxLCJpZCI6IkZSQTEifSx7ImRlc2lyZWRSZXBsaWNhdGlvbkNvdW50IjoxLCJpZCI6Ik5ZQzEifV0sInZlcnNpb24iOjF9LCJtZmFfZW5hYmxlZCI6ZmFsc2UsInN0YXR1cyI6IkFDVElWRSJ9LCJhdXRoZW50aWNhdGlvblR5cGUiOiJzY29wZWRLZXkiLCJzY29wZWRLZXlLZXkiOiJjM2YwNDJhODM5ZDc2ZWJhNGI2ZiIsInNjb3BlZEtleVNlY3JldCI6ImU2ZDExZTNmMzMzYTAyMjE5YzhiMGRmNGQwYTFlOWE5ZmY5ODk1ODU5NmIwMTg5NjRmZDEwNDUxZmEwZWUwZWQiLCJleHAiOjE3OTQ3NzEwNTB9.uYLCz6zngmd4kLeKolvJYwCr3XcV-296eP-jLpBJRYY";
+    const FACTORY_ADDRESS = "0xDa6615eC2b3cC2C27260DEE31828A8945D761318";
+
+    const FACTORY_ABI = [
+  {"inputs":[],"stateMutability":"nonpayable","type":"constructor"},
+  {"anonymous":false,"inputs":[{"indexed":false,"internalType":"uint256","name":"id","type":"uint256"},{"indexed":false,"internalType":"address","name":"token","type":"address"},{"indexed":false,"internalType":"address","name":"curve","type":"address"},{"indexed":false,"internalType":"string","name":"name","type":"string"},{"indexed":false,"internalType":"string","name":"symbol","type":"string"}],"name":"MemeLaunched","type":"event"},
+  {"inputs":[],"name":"LAUNCH_FEE","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},
+  {"inputs":[],"name":"LAUNCH_FEE_RECIPIENT","outputs":[{"internalType":"address","name":"","type":"address"}],"stateMutability":"view","type":"function"},
+  {"inputs":[{"internalType":"string","name":"name","type":"string"},{"internalType":"string","name":"symbol","type":"string"},{"internalType":"string","name":"ipfsHash","type":"string"}],"name":"createTokenAndBuy","outputs":[{"internalType":"address","name":"","type":"address"},{"internalType":"address","name":"","type":"address"}],"stateMutability":"payable","type":"function"},
+  {"inputs":[],"name":"pancakeRouter","outputs":[{"internalType":"address","name":"","type":"address"}],"stateMutability":"view","type":"function"},
+  {"inputs":[],"name":"platformFeeAddress","outputs":[{"internalType":"address","name":"","type":"address"}],"stateMutability":"view","type":"function"}
+];
+
+    const BSC_MAINNET = {chainId:"0x38",chainName:"BNB Smart Chain",nativeCurrency:{name:"BNB",symbol:"BNB",decimals:18},rpcUrls:["https://bsc-dataseed.binance.org/"],blockExplorerUrls:["https://bscscan.com"]};
+
+    // ==== DOM HELPERS ====
+    const $ = id => document.getElementById(id);
+    const connectBtn = $("connectBtn"), disconnectBtn = $("disconnectBtn");
+    const networkTag = $("networkTag"), accountAddr = $("accountAddr");
+    const networkName = $("networkName"), chainId = $("chainId"), balance = $("balance");
+    const launchStatus = $("launchStatus"), resultLinks = $("resultLinks");
+    const btnText = $("btnText"), createBtn = $("createAndBuyBtn");
+    const feeDisplay = $("feeDisplay"), launchFee = $("launchFee");
+    const contractFee = $("contractFee");
+
+    let provider, signer, userAddress, factoryContract, web3Modal;
+    let launchFeeWei = ethers.utils.parseEther("0.0011");
+
+    // ==== WALLET CONNECTION (with debug & fallback) ====
+    async function connectWallet() {
+      console.log("connectWallet start");
+      showStatus("Initializing…", false);
+      try {
+        // Direct injected provider (MetaMask, Trust, etc.)
+        if (window.ethereum) {
+          console.log("using injected ethereum");
+          provider = new ethers.providers.Web3Provider(window.ethereum);
+          await window.ethereum.request({method:'eth_requestAccounts'});
+          signer = provider.getSigner(); userAddress = await signer.getAddress();
+          await switchToBSC();
+          await afterConnect();
+          return;
+        }
+
+        // Web3Modal (WalletConnect QR, etc.)
+        const providerOptions = { walletconnect:{package:WalletConnectProvider.default,options:{rpc:{56:BSC_MAINNET.rpcUrls[0]},qrcodeModalOptions:{mobileLinks:['metamask','trust']}}}};
+        web3Modal = new Web3Modal.default({cacheProvider:false,providerOptions,theme:"dark"});
+        const modalProvider = await web3Modal.connect();
+        provider = new ethers.providers.Web3Provider(modalProvider);
+        signer = provider.getSigner(); userAddress = await signer.getAddress();
+        await switchToBSC();
+        await afterConnect();
+        setupListeners(modalProvider);
+      } catch (e) {
+        console.error(e);
+        let msg = "Connection failed. ";
+        if (e.code===4001) msg+="You rejected the request.";
+        else if (e.message.includes("user rejected")) msg+="Permission denied.";
+        else msg+=e.message||"Check console (F12).";
+        showStatus(msg,true);
+      }
+    }
+
+    async function switchToBSC() {
+      try { await ethereum.request({method:'wallet_switchEthereumChain',params:[{chainId:BSC_MAINNET.chainId}]});
+      } catch (e) { if (e.code===4902) await ethereum.request({method:'wallet_addEthereumChain',params:[BSC_MAINNET]}); else throw e; }
+    }
+
+    async function afterConnect() {
+      factoryContract = new ethers.Contract(FACTORY_ADDRESS,FACTORY_ABI,signer);
+      launchFeeWei = await factoryContract.LAUNCH_FEE();
+      launchFee.textContent = ethers.utils.formatEther(launchFeeWei);
+      feeDisplay.style.display="block";
+      await updateWalletUI();
+      networkTag.textContent="BSC"; networkTag.style.color="var(--success)";
+      connectBtn.style.display="none"; disconnectBtn.style.display="block";
+      // Load extra data for tabs
+      if (document.getElementById('tokens').classList.contains('active')) loadTokens();
+      if (document.getElementById('factory').classList.contains('active')) loadContractInfo();
+    }
+
+    async function updateWalletUI() {
+      const net = await provider.getNetwork();
+      const bal = await provider.getBalance(userAddress);
+      const balBNB = parseFloat(ethers.utils.formatEther(bal)).toFixed(4);
+      if (parseFloat(balBNB)<0.002) showStatus("Low balance – need ≥0.002 BNB for safety.",true);
+      accountAddr.textContent = `${userAddress.slice(0,6)}...${userAddress.slice(-4)}`;
+      networkName.textContent = net.name; chainId.textContent = net.chainId;
+      balance.textContent = balBNB;
+    }
+
+    function disconnectWallet() {
+      if (web3Modal) web3Modal.clearCachedProvider();
+      provider=signer=userAddress=factoryContract=web3Modal=null;
+      feeDisplay.style.display="none"; resetUI(); showStatus("Disconnected.",false);
+    }
+    function resetUI() {
+      accountAddr.textContent=networkName.textContent=chainId.textContent=balance.textContent="—";
+      networkTag.textContent="Not connected"; networkTag.style.color="";
+      connectBtn.style.display="block"; disconnectBtn.style.display="none";
+    }
+    function setupListeners(p) {
+      p.on?.("accountsChanged", async a=>{ if(a.length){userAddress=a[0];await updateWalletUI();}else disconnectWallet(); });
+      p.on?.("chainChanged",()=>location.reload());
+    }
+    connectBtn.onclick=connectWallet; disconnectBtn.onclick=disconnectWallet;
+
+    // ==== PINATA UPLOAD ====
+    async function uploadToPinata(file) {
+      const form = new FormData(); form.append("file",file);
+      const res = await fetch("https://api.pinata.cloud/pinning/pinFileToIPFS",{
+        method:"POST",headers:{Authorization:PINATA_JWT},body:form
+      });
+      if(!res.ok) throw new Error("Pinata upload failed");
+      return (await res.json()).IpfsHash;
+    }
+
+    // ==== LAUNCH LOGIC ====
+    createBtn.onclick = async () => {
+      if(!signer) return showStatus("Connect wallet first.",true);
+      const name=$("tokenName").value.trim(), symbol=$("tokenSymbol").value.trim(),
+            desc=$("tokenDesc").value.trim(), twitter=$("tokenTwitter").value.trim(),
+            telegram=$("tokenTelegram").value.trim(), buyInput=$("buyAmount").value.trim(),
+            file=$("tokenFile").files[0];
+      if(!name||!symbol) return showStatus("Name and symbol required.",true);
+      const buyAmt = buyInput?parseFloat(buyInput):0;
+      if(buyAmt<0) return showStatus("Buy amount cannot be negative.",true);
+      const buyWei = buyAmt?ethers.utils.parseEther(buyAmt.toFixed(18)):ethers.BigNumber.from(0);
+      const total = launchFeeWei.add(buyWei);
+      createBtn.disabled=true; btnText.innerHTML=`<span class="spinner"></span> Confirm in wallet…`;
+
+      let ipfs="";
+      if(file){
+        try{ btnText.innerHTML=`<span class="spinner"></span> Uploading image…`; ipfs=await uploadToPinata(file);
+          showStatus(`Image uploaded! <a href="https://gateway.pinata.cloud/ipfs/${ipfs}" target="_blank">View on IPFS</a>`);
+        }catch(e){ createBtn.disabled=false; btnText.textContent="Create & Buy"; return showStatus("Image upload failed.",true); }
+      }
+
+      btnText.innerHTML=`<span class="spinner"></span> Sending transaction…`;
+      try{
+        const tx = await factoryContract.createTokenAndBuy(name,symbol,desc,ipfs,twitter,telegram,{value:total,gasLimit:5_000_000});
+        showStatus(`Tx sent! <a href="https://bscscan.com/tx/${tx.hash}" target="_blank">BscScan</a>`);
+        btnText.innerHTML=`<span class="spinner"></span> Confirming…`;
+        const receipt = await tx.wait();
+        const ev = receipt.events?.find(e=>e.event==="MemeLaunched");
+        if(!ev) throw new Error("Event not found");
+        const {token,curve} = ev.args;
+        resultLinks.innerHTML = `
+          <a href="https://bscscan.com/address/${FACTORY_ADDRESS}" target="_blank">Factory</a>
+          <a href="https://bscscan.com/tx/${tx.hash}" target="_blank">Launch Tx</a>
+          <a href="https://bscscan.com/address/${token}" target="_blank">Token: ${name} (${symbol})</a>
+          <a href="https://bscscan.com/address/${curve}" target="_blank">Bonding Curve</a>
+        `;
+        resultLinks.style.display="block";
+        showStatus("Launched successfully!",false);
+        btnText.textContent="Launched!";
+      }catch(e){
+        console.error(e);
+        let msg="Transaction failed.";
+        if(e.reason) msg=`Revert: ${e.reason}`;
+        else if(e.message.includes("user rejected")) msg="You rejected the tx.";
+        else if(e.message.includes("insufficient")) msg="Not enough BNB.";
+        showStatus(msg,true);
+      }finally{
+        if(!resultLinks.style.display.includes("block")){ createBtn.disabled=false; btnText.textContent="Create & Buy"; }
+      }
+    };
+
+    function showStatus(html,error=false){
+      launchStatus.innerHTML=html;
+      launchStatus.className=`status ${error?'error':'success'} show`;
+    }
+
+    // ==== TAB SWITCHING ====
+    function switchTab(id){
+      document.querySelectorAll('.tab-content').forEach(c=>c.classList.remove('active'));
+      document.getElementById(id).classList.add('active');
+      document.querySelectorAll('nav a').forEach(a=>a.classList.remove('active'));
+      event.target.classList.add('active');
+      if(id==='tokens' && provider) loadTokens();
+      if(id==='factory' && provider) loadContractInfo();
+    }
+
+    // ==== LOAD LAUNCHED TOKENS ====
+    async function loadTokens(){
+      const loading=$('tokensLoading'), list=$('tokensList');
+      loading.style.display='block'; list.innerHTML='';
+      try{
+        const topic = ethers.utils.id('MemeLaunched(address,address,string,string,string,string,string,string)');
+        const logs = await provider.getLogs({address:FACTORY_ADDRESS,topics:[[topic]],fromBlock:0,toBlock:'latest'});
+        const recent = logs.slice(-50).reverse();
+        if(recent.length===0){ list.innerHTML='<p class="muted" style="text-align:center;">No launches yet – be the first!</p>'; }
+        else{
+          let html='<table><thead><tr><th>Name (Symbol)</th><th>Token</th><th>Curve</th><th>Date</th><th>Socials</th></tr></thead><tbody>';
+          for(const log of recent){
+            const block = await provider.getBlock(log.blockNumber);
+            const args = ethers.utils.defaultAbiCoder.decode(
+              ['address','address','string','string','string','string','string','string'],
+              log.data
+            );
+            const [token,curve,name,symbol,,ipfs,twitter,telegram] = args;
+            const date = new Date(block.timestamp*1000).toLocaleString();
+            html+=`<tr>
+              <td>${name} (${symbol})${ipfs?` <img src="https://gateway.pinata.cloud/ipfs/${ipfs}" style="width:24px;height:24px;border-radius:50%;">`:''}</td>
+              <td><a href="https://bscscan.com/address/${token}" target="_blank">${token.slice(0,8)}…</a></td>
+              <td><a href="https://bscscan.com/address/${curve}" target="_blank">${curve.slice(0,8)}…</a></td>
+              <td>${date}</td>
+              <td>${twitter?`<a href="${twitter}">X</a>`:''} ${telegram?`<a href="${telegram}">TG</a>`:''}</td>
+            </tr>`;
+          }
+          html+='</tbody></table>';
+          list.innerHTML=html;
+        }
+      }catch(e){
+        list.innerHTML=`<p style="color:var(--danger);text-align:center;">Failed: ${e.message}</p>`;
+      }
+      loading.style.display='none';
+    }
+
+    // ==== FACTORY INFO ====
+    async function loadContractInfo(){
+      if(!factoryContract) factoryContract = new ethers.Contract(FACTORY_ADDRESS,FACTORY_ABI,provider);
+      const fee = await factoryContract.LAUNCH_FEE();
+      contractFee.textContent = ethers.utils.formatEther(fee);
+    }
+
+    // Auto-load when tabs become active
+    document.querySelectorAll('nav a').forEach(a=>a.addEventListener('click',e=>switchTab(e.target.getAttribute('onclick').match(/'(\w+)'/)[1])));
+  </script>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'99f907247961076a',t:'MTc2MzMxNzQ5NC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
