@@ -5,8 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>IFMC — Ireland First Meme Centre</title>
   <meta name="description" content="Professional memecoin launchpad on BSC — fair, fast, transparent." />
-  
-  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Avenir:wght@400;500;700&display=swap" rel="stylesheet">
   <style>
     :root {
@@ -120,7 +120,7 @@
       <div class="grid">
         <section class="card">
           <h2>Launch Your Meme Token</h2>
-          <p class="muted">Deploy via verified factory. Fee: 0.0011 BNB (covers gas + curve setup). Optional buy for instant liquidity.</p>
+          <p class="muted">Deploy via verified factory. Fee: 0.0055 BNB (covers gas + curve setup). Optional buy for instant liquidity.</p>
 
           <div class="field"><label class="label">Token Name <span style="color:var(--danger)">*</span></label><input class="input" id="tokenName" placeholder="DogeKing"/></div>
           <div class="field"><label class="label">Token Symbol <span style="color:var(--danger)">*</span></label><input class="input" id="tokenSymbol" placeholder="DOGEK"/></div>
@@ -131,17 +131,15 @@
           <div class="field">
             <label class="label">Buy at Launch (BNB) – Optional</label>
             <input class="input" id="buyAmount" placeholder="0" type="number" step="0.0001"/>
-            <div id="feeDisplay" class="muted" style="display:none;">Launch Fee: <span id="launchFee">0.0011</span> BNB + your buy amount.</div>
+            <div id="feeDisplay" class="muted" style="display:none;">Launch Fee: <span id="launchFee">0.0055</span> BNB + your buy amount.</div>
           </div>
 
           <button id="createAndBuyBtn" class="btn primary" style="width:100%;margin-top:1rem;">
-            <span id="btnText">Create &amp; Buy</span>
+            <span id="btnText">Create & Buy</span>
           </button>
-
           <div id="launchStatus" class="status"></div>
           <div id="resultLinks" class="links" style="display:none;"></div>
         </section>
-
         <aside class="card">
           <h2>Wallet</h2>
           <div class="muted">Account: <span id="accountAddr">—</span></div>
@@ -163,25 +161,22 @@
           <div class="step"><strong>Key Features</strong> – Bonding-curve liquidity, auto-migration to PancakeSwap, no pre-mint, verified contracts.</div>
           <div class="step"><strong>Risks</strong> – Crypto is volatile. Always do your own research (DYOR).</div>
         </div>
-
         <h3 style="margin-top:2rem;">Why Choose IFMC?</h3>
         <table class="table-comparison">
           <thead><tr><th>Feature</th><th>IFMC</th><th>Typical Launchpads</th></tr></thead>
           <tbody>
             <tr><td>Fair Launch</td><td>Yes (Bonding Curve)</td><td>Often No</td></tr>
-            <tr><td>Launch Fee</td><td>0.0011 BNB</td><td>Variable / High</td></tr>
+            <tr><td>Launch Fee</td><td>0.0055 BNB</td><td>Variable / High</td></tr>
             <tr><td>Mobile Support</td><td>Full (WalletConnect)</td><td>Limited</td></tr>
             <tr><td>Verified Contract</td><td>Yes</td><td>Not always</td></tr>
           </tbody>
         </table>
-
         <div class="faq" style="margin-top:2rem;">
           <div class="faq-item"><strong>Is it safe?</strong> All logic lives on-chain; the factory is verified on BscScan.</div>
-          <div class="faq-item"><strong>Can I launch on testnet first?</strong> Yes – switch to BSC Testnet in your wallet and use the same UI.</div>
+          <div class="faq-item"><strong>Can I launch on testnet first?</strong> Yes – switch to BSC Testnet in your wallet and use the same UI and your project on BscScan.</div>
         </div>
       </div>
     </div>
-
     <!-- ==== HOW IT WORKS ==== -->
     <div id="how" class="tab-content">
       <div class="card">
@@ -189,14 +184,13 @@
         <div class="steps">
           <div class="step"><strong>1.</strong> Connect a wallet (MetaMask, Trust, etc.) and ensure you have ≥ 0.002 BNB.</div>
           <div class="step"><strong>2.</strong> Fill the form – name, symbol, optional image (uploaded to IPFS), social links.</div>
-          <div class="step"><strong>3.</strong> Click **Create &amp; Buy** – pays 0.0011 BNB fee + optional buy amount.</div>
+          <div class="step"><strong>3.</strong> Click **Create & Buy** – pays 0.0055 BNB fee + optional buy amount.</div>
           <div class="step"><strong>4.</strong> Factory deploys an ERC-20 token **and** a bonding-curve contract. Full supply goes to the curve.</div>
           <div class="step"><strong>5.</strong> Price starts low; buying pushes it up. When thresholds are hit (≈20 % sold or $10 k value) liquidity auto-migrates to PancakeSwap.</div>
-          <div class="step"><strong>6.</strong> Track everything on BscScan – token, curve, transaction.</div>
+          <div class="step"><strong>6.</strong> Track everything on BscScan – token, curve, transaction, and your project on BscScan.</div>
         </div>
       </div>
     </div>
-
     <!-- ==== LAUNCHED TOKENS ==== -->
     <div id="tokens" class="tab-content">
       <div class="card">
@@ -204,17 +198,16 @@
         <div id="tokensLoading" class="loading" style="display:none;"><span class="spinner"></span>Fetching launches…</div>
         <div id="tokensList"></div>
         <p class="muted" style="text-align:center;margin-top:1rem;">
-          Powered by <code>MemeLaunched</code> events. 
+          Powered by <code>MemeLaunched</code> events.
           <a href="https://bscscan.com/address/0x10f6dcD13531437B1C6E3FC85Bfc48Ff643234A0#events" target="_blank">View All on BscScan</a>
         </p>
       </div>
     </div>
-
     <!-- ==== FACTORY CONTRACT ==== -->
     <div id="factory" class="tab-content">
       <div class="card">
         <h2>IFMC Factory Contract</h2>
-        <p class="muted">Verified on BSC Mainnet – deploys tokens & bonding curves securely.</p>
+        <p class="muted">Verified on BSC Mainnet – deploys tokens & bonding curves securely for your project on BscScan.</p>
         <a href="https://bscscan.com/address/0x10f6dcD13531437B1C6E3FC85Bfc48Ff643234A0#code" target="_blank" class="btn primary">Open on BscScan</a>
         <div id="feeInfo" class="muted" style="margin-top:1rem;">Launch Fee: <span id="contractFee">Loading…</span> BNB</div>
         <p class="muted">Recent transactions: <a href="https://bscscan.com/address/0x10f6dcD13531437B1C6E3FC85Bfc48Ff643234A0#tokentxns" target="_blank">View on BscScan</a></p>
@@ -222,34 +215,28 @@
     </div>
 
   </main>
-
   <footer class="footer">
-    © 2025 IFMC — Professional memecoin launchpad on <strong>BSC Mainnet</strong>. Not financial advice. DYOR.
+    © 2025 IFMC — Professional memecoin launchpad on <strong>BSC Mainnet</strong>. Not financial advice. DYOR. Your project on BscScan.
   </footer>
-
   <!-- ==== SCRIPTS ==== -->
   <script src="https://cdn.jsdelivr.net/npm/ethers@5.7.2/dist/ethers.umd.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/web3modal@1.9.12/dist/index.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/@walletconnect/web3-provider@1.8.0/dist/umd/index.min.js"></script>
-
   <script>
     // ==== CONFIG ====
     const PINATA_JWT = "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySW5mb3JtYXRpb24iOnsiaWQiOiIwMWE2OGMwMy04OTVlLTQxNjktOThmOS05NmI5NDc1MTAxZTAiLCJlbWFpbCI6Im1vbG1jZDE1QGdtYWlsLmNvbSIsImVtYWlsX3ZlcmlmaWVkIjp0cnVlLCJwaW5fcG9saWN5Ijp7InJlZ2lvbnMiOlt7ImRlc2lyZWRSZXBsaWNhdGlvbkNvdW50IjoxLCJpZCI6IkZSQTEifSx7ImRlc2lyZWRSZXBsaWNhdGlvbkNvdW50IjoxLCJpZCI6Ik5ZQzEifV0sInZlcnNpb24iOjF9LCJtZmFfZW5hYmxlZCI6ZmFsc2UsInN0YXR1cyI6IkFDVElWRSJ9LCJhdXRoZW50aWNhdGlvblR5cGUiOiJzY29wZWRLZXkiLCJzY29wZWRLZXlLZXkiOiJjM2YwNDJhODM5ZDc2ZWJhNGI2ZiIsInNjb3BlZEtleVNlY3JldCI6ImU2ZDExZTNmMzMzYTAyMjE5YzhiMGRmNGQwYTFlOWE5ZmY5ODk1ODU5NmIwMTg5NjRmZDEwNDUxZmEwZWUwZWQiLCJleHAiOjE3OTQ3NzEwNTB9.uYLCz6zngmd4kLeKolvJYwCr3XcV-296eP-jLpBJRYY";
     const FACTORY_ADDRESS = "0xC9f94F520b7CE28b06104774961FbEa1F74a5fc5";
-
-    const FACTORY_ABI = [ /* verified ABI – same as previous message */ 
+    const FACTORY_ABI = [ 
       {"inputs":[{"internalType":"address","name":"_platformFeeAddress","type":"address"}],"stateMutability":"nonpayable","type":"constructor"},
       {"anonymous":false,"inputs":[{"indexed":true,"internalType":"address","name":"token","type":"address"},{"indexed":true,"internalType":"address","name":"curve","type":"address"},{"indexed":false,"internalType":"string","name":"name","type":"string"},{"indexed":false,"internalType":"string","name":"symbol","type":"string"},{"indexed":false,"internalType":"string","name":"description","type":"string"},{"indexed":false,"internalType":"string","name":"ipfsHash","type":"string"},{"indexed":false,"internalType":"string","name":"twitter","type":"string"},{"indexed":false,"internalType":"string","name":"telegram","type":"string"}],"name":"MemeLaunched","type":"event"},
       {"inputs":[],"name":"LAUNCH_FEE","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},
       {"inputs":[],"name":"LAUNCH_FEE_RECIPIENT","outputs":[{"internalType":"address","name":"","type":"address"}],"stateMutability":"view","type":"function"},
-      {"inputs":[{"internalType":"string","name":"name","type":"string"},{"internalType":"string","name":"symbol","type":"string"},{"internalType":"string","name":"description","type":"string"},{"internalType":"string","name":"ipfsHash","type":"string"},{"internalType":"string","name":"twitter","type":"string"},{"internalType":"string","name":"telegram","type":"string"}],"name":"createTokenAndBuy","outputs":[{"internalType":"address","name":"tokenAddr","type":"address"},{"internalType":"address","name":"curveAddr","type":"address"}],"stateMutability":"payable","type":"function"},
+      {"inputs":[{"internalType":"string","name":"name","type":"string"},{"internalType":"string","name":"symbol","type":"string"},{"internalType":"string","name":"description","type":"string"},{"internalType":"string","name":"ipfsHash","type":"string"},{"internalType":"string","name":"twitter","type="string"},{"internalType":"string","name":"telegram","type":"string"}],"name":"createTokenAndBuy","outputs":[{"internalType":"address","name":"tokenAddr","type":"address"},{"internalType":"address","name":"curveAddr","type":"address"}],"stateMutability":"payable","type":"function"},
       {"inputs":[],"name":"pancakeRouter","outputs":[{"internalType":"address","name":"","type":"address"}],"stateMutability":"view","type":"function"},
       {"inputs":[],"name":"platformFeeAddress","outputs":[{"internalType":"address","name":"","type":"address"}],"stateMutability":"view","type":"function"},
       {"inputs":[],"name":"priceFeed","outputs":[{"internalType":"address","name":"","type":"address"}],"stateMutability":"view","type":"function"}
     ];
-
     const BSC_MAINNET = {chainId:"0x38",chainName:"BNB Smart Chain",nativeCurrency:{name:"BNB",symbol:"BNB",decimals:18},rpcUrls:["https://bsc-dataseed.binance.org/"],blockExplorerUrls:["https://bscscan.com"]};
-
     // ==== DOM HELPERS ====
     const $ = id => document.getElementById(id);
     const connectBtn = $("connectBtn"), disconnectBtn = $("disconnectBtn");
@@ -259,10 +246,8 @@
     const btnText = $("btnText"), createBtn = $("createAndBuyBtn");
     const feeDisplay = $("feeDisplay"), launchFee = $("launchFee");
     const contractFee = $("contractFee");
-
     let provider, signer, userAddress, factoryContract, web3Modal;
-    let launchFeeWei = ethers.utils.parseEther("0.0011");
-
+    let launchFeeWei = ethers.utils.parseEther("0.0055");
     // ==== WALLET CONNECTION (with debug & fallback) ====
     async function connectWallet() {
       console.log("connectWallet start");
@@ -278,7 +263,6 @@
           await afterConnect();
           return;
         }
-
         // Web3Modal (WalletConnect QR, etc.)
         const providerOptions = { walletconnect:{package:WalletConnectProvider.default,options:{rpc:{56:BSC_MAINNET.rpcUrls[0]},qrcodeModalOptions:{mobileLinks:['metamask','trust']}}}};
         web3Modal = new Web3Modal.default({cacheProvider:false,providerOptions,theme:"dark"});
@@ -297,12 +281,10 @@
         showStatus(msg,true);
       }
     }
-
     async function switchToBSC() {
       try { await ethereum.request({method:'wallet_switchEthereumChain',params:[{chainId:BSC_MAINNET.chainId}]});
       } catch (e) { if (e.code===4902) await ethereum.request({method:'wallet_addEthereumChain',params:[BSC_MAINNET]}); else throw e; }
     }
-
     async function afterConnect() {
       factoryContract = new ethers.Contract(FACTORY_ADDRESS,FACTORY_ABI,signer);
       launchFeeWei = await factoryContract.LAUNCH_FEE();
@@ -315,7 +297,6 @@
       if (document.getElementById('tokens').classList.contains('active')) loadTokens();
       if (document.getElementById('factory').classList.contains('active')) loadContractInfo();
     }
-
     async function updateWalletUI() {
       const net = await provider.getNetwork();
       const bal = await provider.getBalance(userAddress);
@@ -325,7 +306,6 @@
       networkName.textContent = net.name; chainId.textContent = net.chainId;
       balance.textContent = balBNB;
     }
-
     function disconnectWallet() {
       if (web3Modal) web3Modal.clearCachedProvider();
       provider=signer=userAddress=factoryContract=web3Modal=null;
@@ -353,75 +333,25 @@
     }
 
     // ==== LAUNCH LOGIC ====
-createBtn.onclick = async () => {
-  if (!signer) return showStatus("Connect wallet first.", true);
-  const name = $("tokenName").value.trim(),
-        symbol = $("tokenSymbol").value.trim(),
-        desc = $("tokenDesc").value.trim(),
-        twitter = $("tokenTwitter").value.trim(),
-        telegram = $("tokenTelegram").value.trim(),
-        buyInput = $("buyAmount").value.trim(),
-        file = $("tokenFile").files[0];
-  if (!name || !symbol) return showStatus("Name and symbol required.", true);
-  const buyAmt = buyInput ? parseFloat(buyInput) : 0;
-  if (buyAmt < 0) return showStatus("Buy amount cannot be negative.", true);
-  const buyWei = buyAmt ? ethers.utils.parseEther(buyAmt.toFixed(18)) : ethers.BigNumber.from(0);
-  const total = launchFeeWei.add(buyWei);
-  createBtn.disabled = true; 
-  btnText.innerHTML = `<span class="spinner"></span> Confirm in wallet…`;
+    createBtn.onclick = async () => {
+      if(!signer) return showStatus("Connect wallet first.",true);
+      const name=$("tokenName").value.trim(), symbol=$("tokenSymbol").value.trim(),
+            desc=$("tokenDesc").value.trim(), twitter=$("tokenTwitter").value.trim(),
+            telegram=$("tokenTelegram").value.trim(), buyInput=$("buyAmount").value.trim(),
+            file=$("tokenFile").files[0];
+      if(!name||!symbol) return showStatus("Name and symbol required.",true);
+      const buyAmt = buyInput?parseFloat(buyInput):0;
+      if(buyAmt<0) return showStatus("Buy amount cannot be negative.",true);
+      const buyWei = buyAmt?ethers.utils.parseEther(buyAmt.toFixed(18)):ethers.BigNumber.from(0);
+      const total = launchFeeWei.add(buyWei);
+      createBtn.disabled=true; btnText.innerHTML=`<span class="spinner"></span> Confirm in wallet…`;
 
-  let ipfs = "";
-  if (file) {
-    try { 
-      btnText.innerHTML = `<span class="spinner"></span> Uploading image…`; 
-      ipfs = await uploadToPinata(file);
-      showStatus(`Image uploaded! <a href="https://gateway.pinata.cloud/ipfs/${ipfs}" target="_blank">View on IPFS</a>`);
-    } catch (e) { 
-      createBtn.disabled = false; 
-      btnText.textContent = "Create & Buy"; 
-      return showStatus("Image upload failed.", true); 
-    }
-  }
-
-  btnText.innerHTML = `<span class="spinner"></span> Sending transaction…`;
-  try {
-    const tx = await factoryContract.createTokenAndBuy(
-      name,       // name
-      symbol,     // symbol
-      desc,       // description (TEXT)
-      ipfs,       // ipfsHash (CID) ← FIXED
-      twitter,    // twitter
-      telegram,   // telegram
-      { value: total, gasLimit: 5_000_000 }
-    );
-    showStatus(`Tx sent! <a href="https://bscscan.com/tx/${tx.hash}" target="_blank">BscScan</a>`);
-    btnText.innerHTML = `<span class="spinner"></span> Confirming…`;
-    const receipt = await tx.wait();
-    const ev = receipt.events?.find(e => e.event === "MemeLaunched");
-    if (!ev) throw new Error("Event not found");
-    const { token, curve } = ev.args;
-    resultLinks.innerHTML = `
-      <a href="https://bscscan.com/address/${token}" target="_blank">Token: ${name} (${symbol})</a>
-      <a href="https://bscscan.com/address/${curve}" target="_blank">Bonding Curve</a>
-      <a href="https://bscscan.com/tx/${tx.hash}" target="_blank">Launch Tx</a>
-    `;
-    resultLinks.style.display = "block";
-    showStatus("Launched successfully!", false);
-    btnText.textContent = "Launched!";
-  } catch (e) {
-    console.error(e);
-    let msg = "Transaction failed.";
-    if (e.reason) msg = `Revert: ${e.reason}`;
-    else if (e.message.includes("user rejected")) msg = "You rejected the tx.";
-    else if (e.message.includes("insufficient")) msg = "Not enough BNB.";
-    showStatus(msg, true);
-  } finally {
-    if (!resultLinks.style.display.includes("block")) { 
-      createBtn.disabled = false; 
-      btnText.textContent = "Create & Buy"; 
-    }
-  }
-};
+      let ipfs="";
+      if(file){
+        try{ btnText.innerHTML=`<span class="spinner"></span> Uploading image…`; ipfs=await uploadToPinata(file);
+          showStatus(`Image uploaded! <a href="https://gateway.pinata.cloud/ipfs/${ipfs}" target="_blank">View on IPFS</a>`);
+        }catch(e){ createBtn.disabled=false; btnText.textContent="Create & Buy"; return showStatus("Image upload failed.",true); }
+      }
 
       btnText.innerHTML=`<span class="spinner"></span> Sending transaction…`;
       try{
@@ -452,12 +382,10 @@ createBtn.onclick = async () => {
         if(!resultLinks.style.display.includes("block")){ createBtn.disabled=false; btnText.textContent="Create & Buy"; }
       }
     };
-
     function showStatus(html,error=false){
       launchStatus.innerHTML=html;
       launchStatus.className=`status ${error?'error':'success'} show`;
     }
-
     // ==== TAB SWITCHING ====
     function switchTab(id){
       document.querySelectorAll('.tab-content').forEach(c=>c.classList.remove('active'));
@@ -467,7 +395,6 @@ createBtn.onclick = async () => {
       if(id==='tokens' && provider) loadTokens();
       if(id==='factory' && provider) loadContractInfo();
     }
-
     // ==== LOAD LAUNCHED TOKENS ====
     async function loadTokens(){
       const loading=$('tokensLoading'), list=$('tokensList');
@@ -503,14 +430,12 @@ createBtn.onclick = async () => {
       }
       loading.style.display='none';
     }
-
     // ==== FACTORY INFO ====
     async function loadContractInfo(){
       if(!factoryContract) factoryContract = new ethers.Contract(FACTORY_ADDRESS,FACTORY_ABI,provider);
       const fee = await factoryContract.LAUNCH_FEE();
       contractFee.textContent = ethers.utils.formatEther(fee);
     }
-
     // Auto-load when tabs become active
     document.querySelectorAll('nav a').forEach(a=>a.addEventListener('click',e=>switchTab(e.target.getAttribute('onclick').match(/'(\w+)'/)[1])));
   </script>
